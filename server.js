@@ -53,6 +53,6 @@ server.get('/hoge', function(req, res, next) {
   res.send({message: "Hello, world!"});
 });
 
-server.listen(8000, function() {
+server.listen((process.env.PORT || 8000), function() {
   console.log('%s listening at %s', server.name, server.url);
 });
