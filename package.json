@@ -1,14 +1,16 @@
 {
-  "name": "node-api-server",
-  "version": "1.0.0",
+  "name": "restify-sample",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "phi",
   "license": "MIT",
   "dependencies": {
+    "mongodb": "^2.0.39",
+    "mongoose": "^4.1.1",
     "restify": "^3.0.3"
   }
 }
