@@ -33,3 +33,15 @@ post
 curl http://0.0.0.0:8000/users -X POST -d "user[name]=phi" -d "user[age]=26"
 
 - http://d.hatena.ne.jp/thata/20100207/1265554365
+
+### oauth
+
+- https://www.npmjs.com/package/passport-restify
+- https://gist.github.com/yoitsro/8693021
+- https://stormpath.com/blog/build-api-restify-stormpath/
+
+passport
+
+- http://qiita.com/bisque33/items/c5080daf8bc3bc10efb5
+- http://qiita.com/itagakishintaro/items/e5a0481b51e6a17b304c
+- http://tech-sketch.jp/2012/03/nodejs-oauth.html
