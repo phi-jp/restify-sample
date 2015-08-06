@@ -5,7 +5,7 @@ server.use(restify.bodyParser());
 server.use(restify.queryParser());
 
 var mongoose = require('mongoose');
-var uristring = 'mongodb://localhost/';
+var uristring = process.env.MONGOLAB_URI || 'mongodb://localhost/'; 
 
 var db = mongoose.connect(uristring);
 var Schema = mongoose.Schema;
