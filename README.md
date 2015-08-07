@@ -57,4 +57,4 @@ passport
 - https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens
 - http://blog.jeroenpelgrims.be/token-based-sessionless-auth-using-express-and-passport/
 - https://gist.github.com/cgiacomi/cd1efa187b8cccbe2a61
-
+- http://www.dampmann.com/2014/09/nodejs-mongodb-jwt-bcrypt-and.html
