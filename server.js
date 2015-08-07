@@ -1,3 +1,8 @@
+/*
+ * server.js
+ */
+
+
 var restify = require('restify');
 var app = restify.createServer();
 
@@ -12,46 +17,7 @@ var config = require('./config');
 
 var db = mongoose.connect(uristring);
 var Schema = mongoose.Schema;
-
-// スキーマの定義
-var userSchema = new Schema({
-  score: Number,
-  name: String, 
-  screen_name: String,
-  password: String, 
-  admin: Boolean,
-  // description: String,
-});
-
-// モデルを生成
-mongoose.model('user', userSchema);
-var User = mongoose.model('user');
-
-var users = {
-  index: function(req, res) {
-    User.find(function(arr, data){
-      // すべてのコレクションの情報を返す
-      res.send(data);
-    });
-    return 
-  },
-  show: function(req, res) {
-    res.send("show だよー");
-  },
-  create: function(req, res) {
-    var user = new User();
-    user.score = 10;
-    user.save(function(err, data) {
-      res.send({function:'Create', status: 'OK', id: data._id})
-    });
-  },
-  update: function(req, res) {
-    res.send("成功!!!");
-  },
-  destroy: function(req, res) {
-
-  },
-};
+var users = require('./models/users.js');
 
 
 // setup passport
@@ -63,8 +29,11 @@ passport.use(new BearerStrategy({
       if (err) {
         return done(err);
       }
-      else {
+      else if(decoded) {
         return done(null, decoded);
+      }
+      else {
+        return done(null, false);
       }
     });
   }
@@ -115,10 +84,10 @@ app.get('/', function(req, res, next) {
 });
 // 
 app.get('/users', users.index);
-app.get('/users/:id', users.show);
+app.get('/users/:name', users.show);
 app.post('/users', passport.authenticate('bearer', {session:false}), users.create);
-app.put('/users/:id', passport.authenticate('bearer', {session:false}), users.update);
-
+app.put('/users/:name', passport.authenticate('bearer', {session:false}), users.update);
+app.del('/users/:id', passport.authenticate('bearer', {session:false}), users.destroy);
 
 app.get('/setup', function(req, res) {
   var phi = new User({

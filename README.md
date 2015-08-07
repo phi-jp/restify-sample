@@ -45,3 +45,16 @@ passport
 - http://qiita.com/bisque33/items/c5080daf8bc3bc10efb5
 - http://qiita.com/itagakishintaro/items/e5a0481b51e6a17b304c
 - http://tech-sketch.jp/2012/03/nodejs-oauth.html
+
+
+### express で bearer
+
+- http://blog.jeroenpelgrims.be/token-based-sessionless-auth-using-express-and-passport/
+- https://github.com/resurge/passport-http-bearer#making-authenticated-requests
+
+### BearerStrategy x jwt
+
+- https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens
+- http://blog.jeroenpelgrims.be/token-based-sessionless-auth-using-express-and-passport/
+- https://gist.github.com/cgiacomi/cd1efa187b8cccbe2a61
+
