@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>${title}</title>
+    <meta name="description" content="${description}" />
+
+    <style>${style}</style>
+    <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jade/1.3.1/jade.min.js"></script>
+    <script src="http://rawgit.com/phi-jp/riot/build/dist/riot/riot+compiler.js"></script>
+    <script src="http://cdn.rawgit.com/phi-jp/high/0.0.3/high.js"></script>
+
+  </head>
+  <body>
+    <hello title='Hello, runstant!'></hello>
+  </body>
+</html>
+
+<script>
+
+var BASE_PATH = "http://localhost:8000";
+
+
+var API = {
+  ajax: function(params) {
+    params.url = BASE_PATH + params.url;
+    var q = $.ajax(params);
+    q.done(function() {
+      console.log(arguments);
+    })
+  },
+  get: function(id) {
+    if (id) {
+      this.ajax({
+        url: '/users/' + id,
+        method: 'GET',
+        data: {
+        }
+      });
+    }
+    else {
+      this.ajax({
+        url: '/users',
+        method: 'GET',
+        data: {
+        }
+      });
+    }
+  },
+};
+
+
+</script>
+
+<script type='riot/tag' template='jade'>
+  hello
+    h1 {title}
+
+    div
+      button(onclick='API.get()') get
+      button(onclick='API.get(1)') get
+      button post
+      button put
+
+    script(type='text/javascript').
+      this.title = opts.title;
+</script>
+<script>
+  riot.mount("*");
+</script>
