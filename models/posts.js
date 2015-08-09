@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 // ポストのスキーム
 var postSchema = new Schema({
-  _creator : { type: Number, ref: 'User' },
+  _creator : { type: Schema.ObjectId, ref: 'User' },
   title: String,
   content: String,
 });
@@ -16,21 +16,30 @@ var Post = mongoose.model('Post');
 
 module.exports = {
   index: function(req, res) {
-    Post.find(function(err, data){
-      res.send({
-        posts: data,
+    Post.find({})
+      .populate('_creator', 'name')
+      .exec(function(err, data) {
+        res.send({
+          posts: data,
+        });
       });
-    });
   },
   show: function(req, res) {
     res.send({function:'Show', status: 'OK', id: data._id});
   },
   create: function(req, res) {
-    res.send({
-      users: res.user,
+    // create post
+    var post = new Post({
+      _creator: req.user._id,
+      title: 'untitled',
+      content: 'text text text text text text',
     });
 
-    // res.send({function:'Create', status: 'OK', id: data._id});
+    post.save(function(err) {
+      if (err) return handleError(err);
+
+      res.send('success');
+    });
   },
   update: function(req, res) {
     res.send({function:'Update', status: 'OK', id: data._id});

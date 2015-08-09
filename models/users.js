@@ -36,16 +36,9 @@ module.exports = {
     })
   },
   index: function(req, res) {
-    User.find(function(err, data){
-      // すべてのコレクションの情報を返す
-      var users = data.map(function(user) {
-        return {
-          id: user._id,
-          name: user.name,
-        };
-      });
+    User.find({}, ['name', 'screen_name'].join(' '), function(err, data) {
       res.send({
-        users: users,
+        users: data,
       });
     });
   },
