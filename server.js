@@ -18,6 +18,7 @@ var config = require('./config');
 var db = mongoose.connect(uristring);
 var Schema = mongoose.Schema;
 var users = require('./models/users.js');
+var posts = require('./models/posts.js');
 
 
 // setup passport
@@ -82,29 +83,21 @@ app.get('/', function(req, res, next) {
   // res.header 
   res.send("Hello, world!");
 });
+
 // 
 app.get('/users', users.index);
 app.get('/users/:name', users.show);
 app.post('/users', passport.authenticate('bearer', {session:false}), users.create);
 app.put('/users/:name', passport.authenticate('bearer', {session:false}), users.update);
 app.del('/users/:id', passport.authenticate('bearer', {session:false}), users.destroy);
+// 
+app.get('/posts', posts.index);
+app.post('/posts', passport.authenticate('bearer', {session:false}), posts.create);
 
-app.get('/setup', function(req, res) {
-  var phi = new User({
-    name: 'phi',
-    password: 'abcd1234',
-    admin: true,
-  });
-
-  phi.save(function(err) {
-    if (err) throw err;
-
-    console.log('User saved successfully');
-    res.json({success: true});
-  })
-});
+app.get('/setup', users.setup);
 
 
+var User = mongoose.model('User');
 app.post('/auth', function(req, res) {
   User.findOne({
     name: req.body.name,
