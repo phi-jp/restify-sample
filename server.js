@@ -17,7 +17,7 @@ var config = require('./config');
 
 var db = mongoose.connect(uristring);
 var Schema = mongoose.Schema;
-var users = require('./models/users.js');
+var users = require('./controllers/users.js');
 var posts = require('./models/posts.js');
 
 
