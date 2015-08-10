@@ -16,9 +16,14 @@ var Post = mongoose.model('Post');
 
 module.exports = {
   index: function(req, res) {
-    Post.find({})
+    var query = Post
+      .find({
+        // '_creator.name': 'phi',
+      })
       .populate('_creator', 'name')
-      .exec(function(err, data) {
+      ;
+
+    query.exec(function(err, data) {
         res.send({
           posts: data,
         });
